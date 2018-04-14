@@ -13,7 +13,7 @@
             <div class="form-group row ">
                 <label for="empID" class="col-sm-2 col-form-label">EmpID</label>
                 <div class="col-sm-10">
-                    <input type="number" formControlName="empID" name="empID" class="form-control" id="empID" placeholder="Employee ID" maxlength="6"
+                    <input type="number" formControlName="empID" name="empID" class="form-control" id="empID" placeholder="Employee ID" min="1" maxlength="6"
                         oninput="this.value=this.value.slice(0,this.maxLength)" autocomplete="off">
                     <div *ngIf="empForm.controls.empID.invalid && empForm.controls.empID.touched">
                         <ngb-alert type="danger" [dismissible]="false">Employee ID cannot be empty</ngb-alert>

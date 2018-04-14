@@ -1,8 +1,9 @@
   .starter-template {
-            padding: 3rem 1.5rem;
-            text-align: center;
-        }
+      padding: 3rem 1.5rem;
+      text-align: center;
+  }
+
   button {
-            margin-top: 5px;
-            width: 100px;
-        }
+      margin-top: 5px;
+      width: 100px;
+  }

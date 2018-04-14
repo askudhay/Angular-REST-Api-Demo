@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
-  { path: 'addemployee', component: AddemployeeComponent },
+  { path: 'add', component: AddemployeeComponent },
   { path: 'about', component: AboutComponent }
 ];
 

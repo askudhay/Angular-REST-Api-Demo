@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  public isCollapsed = true;
   displayAlert = false;
   deleteMsg = '';
   closed = false;
@@ -20,9 +21,8 @@ export class DashboardComponent implements OnInit {
   }
 
   employees: any = [];
-   
   checkEmployees() {
-    if (this.employees ==null  || this.employees.length === 0) {
+    if (this.employees == null || this.employees.length === 0) {
       return false;
     } else {
       return true;
@@ -30,14 +30,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getEmployees(); 
+    this.getEmployees();
   }
 
   getEmployees() {
     this.appService.getEmployees().subscribe(
       (data: any) => {
         this.employees = data;
-        //Handle different scenarios based on HTTP status
+        // Handle different scenarios based on HTTP status
       });
   }
 
@@ -55,11 +55,11 @@ export class DashboardComponent implements OnInit {
     this.appService.deleteAll().subscribe(
       (data: any) => {
         this.deleteMsg = "Deleted All Employees from System successfully";
-        if(this.closed){
+        if (this.closed) {
           this.closed = false;
         }
         this.displayAlert = true;
-        //Handle different scenarios based on HTTP status
+        // Handle different scenarios based on HTTP status
       });
   }
 
@@ -74,18 +74,18 @@ export class DashboardComponent implements OnInit {
 
   deleteEmployee(eID) {
     this.appService.deleteEmployee(eID).subscribe(
-      (data: any) => {       
+      (data: any) => {
         this.deleteMsg = "Employee " + eID + " has been deleted successfully";
-         if(this.closed){
+        if (this.closed) {
           this.closed = false;
         }
         this.displayAlert = true;
-        this.getEmployees(); 
-        //Handle different scenarios based on HTTP status
+        this.getEmployees();
+        // Handle different scenarios based on HTTP status
       });
   }
 
-  addEmployee(){
-    this.router.navigate(['/addemployee']);
+  addEmployee() {
+    this.router.navigate(['/add']);
   }
 }
