@@ -1,0 +1,82 @@
+<main role="main" class="container">
+    <div class="starter-template">
+        <h1>Add New Employee</h1>
+        <p class="lead">
+            Enter new employee details
+        </p>
+         <p *ngIf="displayAlert">
+            <ngb-alert type="success" *ngIf="!closed" (close)="closed=true">{{ info }} Goto <a class="nav-link" href="#" routerLink="/">Home</a></ngb-alert>
+        </p>
+    </div>
+    <div class="row">       
+        <form class="form-emp" [formGroup]="empForm" [hidden]="hideForm">
+            <div class="form-group row ">
+                <label for="empID" class="col-sm-2 col-form-label">EmpID</label>
+                <div class="col-sm-10">
+                    <input type="number" formControlName="empID" name="empID" class="form-control" id="empID" placeholder="Employee ID" maxlength="6"
+                        oninput="this.value=this.value.slice(0,this.maxLength)" autocomplete="off">
+                    <div *ngIf="empForm.controls.empID.invalid && empForm.controls.empID.touched">
+                        <ngb-alert type="danger" [dismissible]="false">Employee ID cannot be empty</ngb-alert>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label for="empName" class="col-sm-2 col-form-label">EmpName</label>
+                <div class="col-sm-10">
+                    <input type="text" formControlName="empName" name="empName" class="form-control" id="empName" placeholder="Employee Name"
+                        onDrag="return false" onDrop="return false" onpaste="return false;" oninput="if(this.value.trim().length === 0 ) this.value = this.value.trim()"
+                        autocomplete="off">
+                    <div *ngIf="empForm.controls.empName.invalid && empForm.controls.empName.touched">
+                        <ngb-alert type="danger" [dismissible]="false">Employee Name cannot be empty</ngb-alert>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="empDesgn" class="col-sm-2 col-form-label">Emp Title</label>
+                <div class="col-sm-10">
+                    <input type="text" formControlName="empDesg" name="empDesg" class="form-control" id="empDesgn" placeholder="Employee Title"
+                        onDrag="return false" onDrop="return false" onpaste="return false;" oninput="if(this.value.trim().length === 0 ) this.value = this.value.trim()"
+                        autocomplete="off">
+                    <div *ngIf="empForm.controls.empDesg.invalid && empForm.controls.empDesg.touched">
+                        <ngb-alert type="danger" [dismissible]="false">Employee Designation cannot be empty</ngb-alert>
+                    </div>
+                </div>
+            </div>          
+            <div class="form-group row">
+                <div class="col-sm-2">Skillset</div>
+                <div class="col-sm-10">
+                    <div class="form-check" *ngFor="let skill of skills">
+                        <input class="form-check-input" type="checkbox" (change)="onActivityChange(skill,$event.target.checked)" [checked]="isActivityChecked(skill)">
+                        <label class="form-check-label">
+                            {{ skill }}
+                            </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <button type="submit" class="btn btn-primary" (click)="displayPostDialog(content)" [disabled]="!empForm.valid">Add</button>
+                </div>
+                <div class="col-sm-5">
+                    <button type="submit" class="btn btn-primary" (click)="reset()">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h6 class="modal-title">Alert</h6>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+    </div>
+    <div class="modal-body">
+        <p> {{ info }}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn btn-danger" (click)="c('Yes')">Yes</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('No')">No</button>
+    </div>
+</ng-template>

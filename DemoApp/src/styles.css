@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+  html {
+            position: relative !important; 
+            min-height: 100% !important;
+        }
+
+
+        body {
+            padding-top: 5rem !important;
+            margin-bottom: 60px !important;
+        }

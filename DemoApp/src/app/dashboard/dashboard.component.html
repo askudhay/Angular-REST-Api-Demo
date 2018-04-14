@@ -1,0 +1,76 @@
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>Employee Details</h1>
+        <p class="lead">
+            Here is the Employee information obtained through REST API.
+        </p>
+        <p *ngIf="displayAlert">
+            <ngb-alert type="success" *ngIf="!closed" (close)="closed=true">{{ deleteMsg }}</ngb-alert>
+        </p>
+
+        <div *ngIf="!checkEmployees(); else elseBlock" class="row align-items-center justify-content-center" style="overflow-x: auto">
+            <div>
+                No Employees in the System
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-sm-3 align-self-center">
+                <button type="button" class="btn btn-secondary " (click)="addEmployee()">Add</button>
+            </div>
+            <div class="col-sm-3 align-self-center">
+                <button type="button" class="btn btn-danger" (click)="displayDeleteAllDialog(content)" [disabled]="!checkEmployees()">Delete All</button>
+            </div>
+        </div>
+    </div>
+</main>
+<ng-template #elseBlock>
+    <table class="table table-sm table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">EmpID</th>
+                <th scope="col">EmpName</th>
+                <th scope="col">EmpDesignation</th>
+                <th scope="col">EmpSkills</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of employees; let rowIndex=index">
+                <td>{{ rowIndex +1 }} </td>
+                <td>{{ emp.empID }} </td>
+                <td>{{ emp.empName }} </td>
+                <td>{{ emp.empDesg }} </td>
+                <td> {{ emp.empSkills }} </td>
+                <td>
+                    <span title="coming up in next version">
+                                <fa name="edit" ></fa>
+                    </span>
+                </td>
+                <td>
+                    <a href="#" (click)="displayDeleteDialog(content, emp.empID)">
+                        <fa name="trash"></fa>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</ng-template>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h6 class="modal-title">Alert</h6>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+    </div>
+    <div class="modal-body">
+        <p> {{ deleteMsg }}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn btn-danger" (click)="c('Yes')">Yes</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('No')">No</button>
+    </div>
+</ng-template>
